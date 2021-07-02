@@ -73,6 +73,9 @@ export default function Update() {
                 let data = await response.json();
                 if(data.message==='Password Updated'){
                     toast.success('Password Updated')
+                    setTimeout(() => {
+                        history.push('/login')
+                    }, 5000);
                 }else if(data.message==='Enter valid password'){
                     toast.error('Enter valid password')
                 }else if(data.message==='Enter valid email'){
