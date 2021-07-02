@@ -1,24 +1,40 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router,
+Route,
+Switch } from "react-router-dom";
 
+import Home from './homepage';
+import SignUp from './register';
+import SignIn from './login';
+import ForgotPassword from './forgot-password';
+import Update from './update-password';
+import LongUrl from './longurl';
+import ShortUrl from './shorturl';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+      <Router>
+        <div className="container-fluid">
+          <div className="row no-gutter">
+            <div className="col-lg-md-sm-12">
+            
+      
+      <Switch>
+        <Route path="/" component={Home} exact={true}/>
+        <Route path="/register" component={SignUp} exact={true}/>
+        <Route path="/login" component={SignIn} exact={true}/>
+        <Route path="/forgot-password" component={ForgotPassword} exact={true}/>
+        <Route path="/update-password" component={Update} exact={true}/>
+        <Route path="/longurl" component={LongUrl} exact={true}/>
+        <Route path="/shorturl" component={ShortUrl} exact={true}/>
+      </Switch>
+            </div>
+          </div>
+        </div>
+          
+      </Router>
+   </>
   );
 }
 
