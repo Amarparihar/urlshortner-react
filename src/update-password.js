@@ -59,7 +59,7 @@ export default function Update() {
                 setConfirmPassword("");
                 
                 let response = await fetch("https://urlshortnerserver.herokuapp.com/update-password",{
-                    method:'POST',
+                    method:'PUT',
                     body:JSON.stringify({
                         email,
                         password,
