@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,8 +8,7 @@ export default function Update() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const history = useHistory();
-
+ 
   return (
     <>
       <nav
@@ -73,9 +72,7 @@ export default function Update() {
                 let data = await response.json();
                 if(data.message==='Password Updated'){
                     toast.success('Password Updated')
-                    setTimeout(() => {
-                        history.push('/login')
-                    }, 5000);
+                    
                 }else if(data.message==='Enter valid password'){
                     toast.error('Enter valid password')
                 }else if(data.message==='Enter valid email'){
