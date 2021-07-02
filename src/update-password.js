@@ -70,17 +70,15 @@ export default function Update() {
                     }
                 })
 
-                let data = response.json();
+                let data = await response.json();
                 if(data.message==='Password Updated'){
-                    toast.success('Password Updated');
-                    setTimeout(() => {
-                        history.push("/login");
-                    }, 5000);
+                    toast.success('Password Updated')
                 }else if(data.message==='Enter valid password'){
-                    toast.error('Enter valid password');
-                }else{
-                    toast.warn('Enter valid email');
+                    toast.error('Enter valid password')
+                }else if(data.message==='Enter valid email'){
+                    toast.warn('Enter valid email')
                 }
+               
               }}
             >
               <div className="form-group mt-3">
