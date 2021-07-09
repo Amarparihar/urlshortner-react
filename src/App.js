@@ -26,8 +26,8 @@ function App() {
         <Route path="/login" component={SignIn} exact={true}/>
         <Route path="/forgot-password" component={ForgotPassword} exact={true}/>
         <Route path="/update-password" component={Update} exact={true}/>
-        <Route path="/longurl" component={LongUrl} exact={true}/>
-        <Route path="/shorturl" component={ShortUrl} exact={true}/>
+        <Route path="/longurl/:id" component={LongUrl} exact={true}/>
+        <Route path="/shorturl/:id" component={ShortUrl} exact={true}/>
       </Switch>
             </div>
           </div>

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-export default function LongUrl() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+export default function LongUrl(props) {
+
+
     const[longURL,setLongURL] = useState("");
     const history = useHistory();
 
@@ -24,7 +30,7 @@ export default function LongUrl() {
                 <Link
                   to="/"
                   className="nav-link"
-                  
+                  onClick={()=>{window.localStorage.removeItem('Token')}}
                   style={{ color: "black" }}
                 >
                   Sign Out
@@ -51,11 +57,34 @@ export default function LongUrl() {
 
           <div className="col-sm-md-lg-6">
             <form
-              onSubmit={(e) => {
+              onSubmit={async(e) => {
                 e.preventDefault();
-                console.log(longURL);
                 setLongURL("");
-                history.push("/shorturl");
+
+                let response = await fetch(`http://localhost:5000/longurl/${props.match.params.id}`,{
+                    method:'POST',
+                    body:JSON.stringify({
+                        longURL,
+                        email:props.match.params.id
+                    }),
+                    headers:{
+                        authorization:window.localStorage.getItem('myToken') ,
+                        "content-type":"application/json"
+                    }
+                })
+
+                let data = await response.json();
+                if(data.message==='Url shorted'){
+
+                     history.push(`/shorturl/${props.match.params.id}`);
+                    
+                }else if(data.message==='Invalid ID'){
+                    toast.error('Invalid ID');
+                    setTimeout(() => {
+                        history.push('/login');
+                    }, 5000);
+                }
+                
                 
               }}
             >
@@ -86,6 +115,7 @@ export default function LongUrl() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }

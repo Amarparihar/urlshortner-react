@@ -69,11 +69,17 @@ export default function SignIn(){
                     })
 
                     let data = await response.json();
+                    window.localStorage.setItem('myToken',data.token)
+                    let token = data.token;
                     if(data.message==='Login Successful'){
-                        toast.success('Login Successful');
-                        setTimeout(() => {
-                            history.push('/longurl');
-                        }, 5000);
+                        
+                        if(token){
+                            toast.success('Login Successful');
+                            setTimeout(() => {
+                                history.push(`/longurl/${email}`);
+                            }, 5000);
+                        }
+                       
                     }else if(data.message==='Invalid Creadentials'){
                         toast.error('Invalid Creadentials');
                     }else{
