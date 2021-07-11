@@ -14,7 +14,7 @@ export default function ShortUrl(props) {
       setShortURL([...urlData]);
     }
     fetchData();
-  }, []);
+  }, [props.match.params.id]);
 
   return (
     <>
