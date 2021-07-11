@@ -15,7 +15,6 @@ export default function Nav() {
 
           <div className="collapse navbar-collapse responsive">
             <ul className="navbar-nav ms-auto">
-              
               <li>
                 <Link
                   to="/register"
@@ -29,7 +28,6 @@ export default function Nav() {
                 <Link
                   to="/login"
                   className="nav-link"
-                
                   style={{ color: "black" }}
                 >
                   Sign In

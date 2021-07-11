@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Update() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
- 
+
   return (
     <>
       <nav
@@ -24,12 +24,10 @@ export default function Update() {
 
           <div className="collapse navbar-collapse responsive">
             <ul className="navbar-nav ms-auto">
-
               <li className="nav-item">
                 <Link
                   to="/login"
                   className="nav-link"
-                  
                   style={{ color: "black" }}
                 >
                   Back TO SignIn
@@ -51,34 +49,35 @@ export default function Update() {
 
           <div className="col-sm-md-lg-6">
             <form
-              onSubmit={async(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
-                
-                let response = await fetch("https://urlshortnerserver.herokuapp.com/update-password",{
-                    method:'PUT',
-                    body:JSON.stringify({
-                        email,
-                        password,
-                        confirmPassword
+
+                let response = await fetch(
+                  "https://urlshortnerserver.herokuapp.com/update-password",
+                  {
+                    method: "PUT",
+                    body: JSON.stringify({
+                      email,
+                      password,
+                      confirmPassword,
                     }),
-                    headers:{
-                        "content-type":"application/json"
-                    }
-                })
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                  }
+                );
 
                 let data = await response.json();
-                if(data.message==='Password Updated'){
-                    toast.success('Password Updated')
-                    
-                }else if(data.message==='Enter valid password'){
-                    toast.error('Enter valid password')
-                }else if(data.message==='Enter valid email'){
-                    toast.warn('Enter valid email')
+                if (data.message === "Password Updated") {
+                  toast.success("Password Updated");
+                } else if (data.message === "Enter valid password") {
+                  toast.error("Enter valid password");
+                } else if (data.message === "Enter valid email") {
+                  toast.warn("Enter valid email");
                 }
-               
               }}
             >
               <div className="form-group mt-3">
@@ -143,7 +142,7 @@ export default function Update() {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

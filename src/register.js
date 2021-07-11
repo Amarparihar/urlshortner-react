@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -9,7 +9,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState();
 
-  const history= useHistory();
+  const history = useHistory();
 
   return (
     <>
@@ -36,7 +36,6 @@ export default function SignUp() {
                 <Link
                   to="/login"
                   className="nav-link"
-                  
                   style={{ color: "black" }}
                 >
                   Sign In
@@ -51,38 +50,38 @@ export default function SignUp() {
           <div class="row gx-4 gx-lg-5">
             <div class="col-md-10 col-lg-8 mx-auto ">
               <form
-                onSubmit={async(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   setFirstName("");
                   setLastName("");
                   setEmail("");
                   setPassword("");
 
-                  let response = await fetch("https://urlshortnerserver.herokuapp.com/register",{
-                      method:'POST',
-                      body:JSON.stringify({
-                          firstName,
-                          lastName,
-                          email,
-                          password
+                  let response = await fetch(
+                    "https://urlshortnerserver.herokuapp.com/register",
+                    {
+                      method: "POST",
+                      body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
                       }),
-                      headers:{
-                          "content-type":"application/json"
-                      }
-
-                  })
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                    }
+                  );
 
                   let data = await response.json();
-                  if(data.message==='user registered successfully'){
-                      toast.success('user registered successfully');
-                      setTimeout(() => {
-                          history.push("/login");
-                      }, 5000);
-                  }else{
-                    toast.error('user already registered');
+                  if (data.message === "user registered successfully") {
+                    toast.success("user registered successfully");
+                    setTimeout(() => {
+                      history.push("/login");
+                    }, 5000);
+                  } else {
+                    toast.error("user already registered");
                   }
-                      
-                
                 }}
               >
                 <div className="form-group">
@@ -162,7 +161,7 @@ export default function SignUp() {
           </div>
         </div>
       </section>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

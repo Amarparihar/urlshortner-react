@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -21,12 +21,10 @@ export default function ForgotPassword() {
 
           <div className="collapse navbar-collapse responsive">
             <ul className="navbar-nav ms-auto">
-
               <li className="nav-item">
                 <Link
                   to="/login"
                   className="nav-link"
-                 
                   style={{ color: "black" }}
                 >
                   Back TO SignIn
@@ -47,12 +45,10 @@ export default function ForgotPassword() {
             <div style={{ fontFamily: "serif", textAlign: "start" }}>
               <ul>
                 <li>
-                  
                   Step1 : Enter your registered Email Id and press Submit button
                 </li>
                 <li> Step2 : You will get mail for Reset your password</li>
                 <li>
-                  
                   Step3 : You will have one string after clicked that string you
                   will redirects to the other page where you can changed your
                   password
@@ -63,25 +59,28 @@ export default function ForgotPassword() {
 
           <div className="col-sm-md-lg-6">
             <form
-              onSubmit={async(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 setEmail("");
 
-                let response = await fetch("https://urlshortnerserver.herokuapp.com/forgot-password",{
-                    method:'POST',
-                    body:JSON.stringify({
-                        email
+                let response = await fetch(
+                  "https://urlshortnerserver.herokuapp.com/forgot-password",
+                  {
+                    method: "POST",
+                    body: JSON.stringify({
+                      email,
                     }),
-                    headers:{
-                        "content-type":"application/json"
-                    }
-                })
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                  }
+                );
 
                 let data = await response.json();
-                if(data.message==='string genrated'){
-                    toast.info('Kindly Check Your Mail');
-                }else{
-                    toast.error('Insert valid email address');
+                if (data.message === "string genrated") {
+                  toast.info("Kindly Check Your Mail");
+                } else {
+                  toast.error("Insert valid email address");
                 }
               }}
             >
@@ -112,7 +111,7 @@ export default function ForgotPassword() {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

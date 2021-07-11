@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function LongUrl(props) {
-
-
-    const[longURL,setLongURL] = useState("");
-    const history = useHistory();
+  const [longURL, setLongURL] = useState("");
+  const history = useHistory();
 
   return (
     <>
@@ -30,7 +27,9 @@ export default function LongUrl(props) {
                 <Link
                   to="/"
                   className="nav-link"
-                  onClick={()=>{window.localStorage.removeItem('Token')}}
+                  onClick={() => {
+                    window.localStorage.removeItem("Token");
+                  }}
                   style={{ color: "black" }}
                 >
                   Sign Out
@@ -57,41 +56,38 @@ export default function LongUrl(props) {
 
           <div className="col-sm-md-lg-6">
             <form
-              onSubmit={async(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 setLongURL("");
 
-                let response = await fetch(`https://urlshortnerserver.herokuapp.com/longurl/${props.match.params.id}`,{
-                    method:'POST',
-                    body:JSON.stringify({
-                        longURL,
-                        email:props.match.params.id
+                let response = await fetch(
+                  `https://urlshortnerserver.herokuapp.com/longurl/${props.match.params.id}`,
+                  {
+                    method: "POST",
+                    body: JSON.stringify({
+                      longURL,
+                      email: props.match.params.id,
                     }),
-                    headers:{
-                        authorization:window.localStorage.getItem('myToken') ,
-                        "content-type":"application/json"
-                    }
-                })
+                    headers: {
+                      authorization: window.localStorage.getItem("myToken"),
+                      "content-type": "application/json",
+                    },
+                  }
+                );
 
                 let data = await response.json();
-                if(data.message==='Url shorted'){
-
-                     history.push(`/shorturl/${props.match.params.id}`);
-                    
-                }else if(data.message==='Invalid ID'){
-                    toast.error('Invalid ID');
-                    setTimeout(() => {
-                        history.push('/login');
-                    }, 5000);
+                if (data.message === "Url shorted") {
+                  history.push(`/shorturl/${props.match.params.id}`);
+                } else if (data.message === "Invalid ID") {
+                  toast.error("Invalid ID");
+                  setTimeout(() => {
+                    history.push("/login");
+                  }, 5000);
                 }
-                
-                
               }}
             >
               <div className="form-group mt-3">
-                <label for="URL">
-                  Paste URL:
-                </label>
+                <label for="URL">Paste URL:</label>
                 <input
                   type="url"
                   className="form-control"
@@ -115,7 +111,7 @@ export default function LongUrl(props) {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }
