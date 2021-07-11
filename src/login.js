@@ -69,11 +69,12 @@ export default function SignIn(){
                     })
 
                     let data = await response.json();
+                   
                     window.localStorage.setItem('myToken',data.token)
-                    let token = data.token;
+                   
                     if(data.message==='Login Successful'){
                         
-                        if(token){
+                        if(data.token){
                             toast.success('Login Successful');
                             setTimeout(() => {
                                 history.push(`/longurl/${email}`);

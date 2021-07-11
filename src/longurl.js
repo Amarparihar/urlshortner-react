@@ -61,7 +61,7 @@ export default function LongUrl(props) {
                 e.preventDefault();
                 setLongURL("");
 
-                let response = await fetch(`http://localhost:5000/longurl/${props.match.params.id}`,{
+                let response = await fetch(`https://urlshortnerserver.herokuapp.com/longurl/${props.match.params.id}`,{
                     method:'POST',
                     body:JSON.stringify({
                         longURL,
