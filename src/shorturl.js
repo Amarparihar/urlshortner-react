@@ -7,7 +7,7 @@ export default function ShortUrl(props) {
   useEffect(() => {
     async function fetchData() {
       let url = await fetch(
-        `https://urlshortnerserver.herokuapp.com/shorturl/${props.match.params.id}`
+        `https://urlshortnerserver.herokuapp.com/shorturl/${props.match.params.id}`,{method:'GET'}
       );
       let urlData = await url.json();
 
